@@ -1,0 +1,10 @@
+# 这是一个省市级联插件demo
+# 使用的是静态省市数据,所以可能要改成动态加载数据
+
+# 查看使用效果图 
+# http://note.youdao.com/noteshare?id=d9fac659d4696fdc045792472eefb330
+
+#源参考文档
+# https://www.oschina.net/p/city-picker-2?fromerr=DoUoWsGB
+#github
+# https://github.com/tshi0912/city-picker
