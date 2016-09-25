@@ -11,14 +11,73 @@
 	<script src="js/city-picker.data.js"></script>
 	<script src="js/city-picker.js"></script>
 	<link href="css/city-picker.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+
  </head>
  <body>
 	<div style="position: relative;"><!-- container -->
-		<div data-toggle="city-picker">
-		<input readonly type="text" data-toggle="city-picker" >
+			<input readonly type="text" data-toggle="city-picker" placeholder="点击从下拉面板中选择省/市/区"  style="width:50%" value="北京市/北京市/海淀区"/>
+	</div>
+	
+<br/>
+<br/>
+<br/>
+
+	<div style="position: relative;"><!-- container -->
+			<input id="city-picker" readonly type="text"  style="width:300px"  >
 	</div>
 
-	
-</div>
+	<div class="form-group">
+		<button class="btn btn-warning" id="reset" type="button">reset</button>
+		<button class="btn btn-danger" id="destroy" type="button">destroy</button>
+
+		<div class="dropup">
+			<button id="code-count" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				<span class="text">Full Code</span>
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li><a href="javascript:void(0);" data-count="">Full Code</a></li>
+				<li role="separator" class="divider"></li>
+				<li><a href="javascript:void(0);" data-count="province">Province Code</a></li>
+				<li><a href="javascript:void(0);" data-count="city">City Code</a></li>
+				<li><a href="javascript:void(0);" data-count="district">District Code</a></li>
+			</ul>
+		</div>
+		<button class="btn btn-success" id="get-code" type="button">getCode<span class="code"></span></button>
+	</div>
  </body>
+	 <script type="text/javascript">
+		var $citypicker3=$("#city-picker");
+
+		$(function(){
+			$("#city-picker").citypicker({
+			  province: "江苏省",
+			  city: "常州市",
+			  district: "溧阳市"
+			});
+		});
+
+		$('#reset').click(function () {
+			$citypicker3.citypicker('reset');
+		});
+
+		$('#destroy').click(function () {
+			$citypicker3.citypicker('destroy');
+		});
+
+		$('#get-code').click(function () {
+			var count = $('#code-count').data('count');
+			var code = $citypicker3.data('citypicker').getCode(count);
+			$(this).find('.code').text(': ' + code);
+		});
+
+		$('.dropup .dropdown-menu a').click(function () {
+			var $btn = $('#code-count');
+			$btn.data('count', $(this).data('count')).find('.text').text($(this).text());
+			if ($('#get-code .code').text()) {
+				$('#get-code').trigger('click');
+			}
+		});
+	</script>
 </html>
